@@ -1,23 +1,27 @@
 const db = require('../../dbConfig');
 
 const getAllClients = () => {
-    console.log('getAllClients');
+    return db('clients');
 }
 
-const getClient = () => {
-    console.log('getClient');
+const getClient = id => {
+    return db('clients').where({ id });
 }
 
-const addClient = () => {
-    console.log('addClient');
+const addClient = async newClient => {
+    const [ id ] = await db('clients').insert(newClient);
+
+    return db('clients').where({ id });
 }
 
-const editClient = () => {
-    console.log('editClient');
+const editClient = async (id, update) => {
+    await db('clients').where({ id }).update(update);
+
+    return db('clients').where({ id })
 }
 
-const deleteClient = () => {
-    console.log('deleteClient');
+const deleteClient = id => {
+    return db('clients').where({ id }).del();
 }
 
 module.exports = {

@@ -20,7 +20,7 @@ const editDev = async (id, update) => {
     return db('developers').where({ id })
 }
 
-const deleteDev = async id => {
+const deleteDev = id => {
     return db('developers').where({ id }).del();
 }
 
