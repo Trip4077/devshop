@@ -1,23 +1,27 @@
 const db = require('../../dbConfig');
 
 const getAllProjects = () => {
-    console.log('getAllProjects');
+    return db('projects');
 }
 
 const getProject = id => {
-    console.log('getProject');
+    return db('projects').where({ id });
 }
 
-const addProject = project => {
-    console.log('addProject');
+const addProject = async project => {
+    const [ id ] = await db('projects').insert(project);
+
+    return db('projects').where({ id });
 }
 
-const editProject = (id, update) => {
-    console.log('editProject');
+const editProject = async (id, update) => {
+    await db('projects').where({ id }).update(update);
+
+    return db('projects').where({ id });
 }
 
 const deleteProject = id => {
-    console.log('deleteProject');
+    return db('projects').where({ id }).del();
 }
 
 module.exports = {
