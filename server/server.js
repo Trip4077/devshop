@@ -13,7 +13,12 @@ server.use(
     express.json(),
     helmet(),
     cors(),
-    logger()
+    logger('dev')
 )
+
+// HOMEPAGE ROUTING
+server.get("/", async (req, res) => {
+    res.json({ message: "Server Is Working" });
+  });
 
 module.exports = server;
