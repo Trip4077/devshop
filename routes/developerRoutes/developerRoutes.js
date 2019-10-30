@@ -12,6 +12,9 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+    //Ensure ID was passed to route
+    if( !req.params.id ) res.status(400).json({ err: "Missing ID" });
+
     await Developers.getDev(req.params.id)
                     .then(dev => {
                         //Check if developer ID exists in database
@@ -39,6 +42,21 @@ router.put('/:id', async (req, res) => {
                     .catch(err => {
                         console.log(err);
                     }) 
+});
+
+router.delete('/:id', async (req, res) => {
+    //Ensure ID was passed to route
+    if( !req.params.id ) res.status(400).json({ err: "Missing ID" });
+
+    await Developers.deleteDev(req.params.id)
+                    .then(delDevID => {
+                        if( !delDevID ) res.status(400).json({ err: 'Invalid ID' });
+
+                        res.status(200).json({ success: `Developer has been removed`});
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
 });
 
 module.exports = router;

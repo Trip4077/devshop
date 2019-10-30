@@ -5,9 +5,9 @@ const db = require('../../data/dbConfig');
 
 describe('DEVELOPER ROUTES', () => {
 
-    // beforeEach(async () => {
-    //     return await db('developers').truncate();
-    // });
+    beforeEach(async () => {
+        return await db('developers').truncate();
+    });
 
     describe('GET /devs', () => {
 
@@ -126,5 +126,28 @@ describe('DEVELOPER ROUTES', () => {
 
             expect(res.body.err).toBe("Missing ID or Update Value");
         });
-    })
+    });
+
+    describe('DELETE /devs/:id', () => {
+        it('should return status 200 if successful', async () => {
+            const res = await request(server)
+                              .delete('/api/devs/3')
+
+            expect(res.status).toBe(200);
+        });
+
+        it('should return status 400 if missing id', async () => {
+            const res = await request(server)
+                              .delete('/api/devs/undefined');
+
+            expect(res.status).toBe(400);
+        });
+
+        it('should return status 400 if id invalid', async () => {
+            const res = await request(server)
+                              .delete('/api/devs/25');
+
+            expect(res.status).toBe(400);
+        });
+    });
 });
