@@ -8,6 +8,10 @@ const getDev = id => {
     return db('developers').where({ id });
 }
 
+const getDevByEmail = email => {
+    return db('developers').where({ email });
+}
+
 const addDev = async newDev => {
     const [ id ] = await db('developers').insert(newDev);
 
@@ -27,6 +31,7 @@ const deleteDev = id => {
 module.exports = {
     getAllDevs,
     getDev,
+    getDevByEmail,
     addDev,
     editDev,
     deleteDev

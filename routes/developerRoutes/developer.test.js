@@ -5,9 +5,9 @@ const db = require('../../data/dbConfig');
 
 describe('DEVELOPER ROUTES', () => {
 
-    beforeEach(async () => {
-        return await db('developers').truncate();
-    });
+    // beforeEach(async () => {
+    //     return await db('developers').truncate();
+    // });
 
     describe('GET /devs', () => {
 
