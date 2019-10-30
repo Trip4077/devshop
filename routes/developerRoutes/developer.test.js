@@ -69,4 +69,62 @@ describe('DEVELOPER ROUTES', () => {
             expect(res.body.err).toBe('Invalid ID');
         })
     });
+
+    describe('PUT /devs/:id', () => {
+        it('should return status 200 if successful', async () => {
+            const res = await request(server)
+                              .put('/api/devs/1')
+                              .send({ first_name: "Bob" });
+
+            expect(res.status).toBe(200);
+        });
+
+        it('should update based on sent changes', async () => {
+            const res = await request(server)
+                              .put('/api/devs/1')
+                              .send({ first_name: "Tristan" });
+
+            expect(res.body.first_name).toBe("Tristan");
+        });
+
+        it('should return status 400 if missing body', async () => {
+            const res = await request(server)
+                              .put('/api/devs/1')
+                              .send(undefined);
+
+            expect(res.status).toBe(400);
+        });
+
+        it('should return status 400 if missing id', async () => {
+            const res = await request(server)
+                              .put('/api/devs/undefined')
+                              .send({ first_name: "Tristan" });
+
+            expect(res.status).toBe(400);
+        });
+
+        it('should return status 400 if id invalid', async () => {
+            const res = await request(server)
+                              .put('/api/devs/25')
+                              .send({ first_name: "Tristan" });
+
+            expect(res.status).toBe(400);
+        });
+
+        it('should return Invalid ID message if ID doesnt match', async () => {
+            const res = await request(server)
+                              .put('/api/devs/25')
+                              .send({ first_name: "Tristan" });
+
+            expect(res.body.err).toBe("Invalid ID");
+        });
+
+        it('should return Missing ID or Update Value message if missing ID or body', async () => {
+            const res = await request(server)
+                              .put('/api/devs/10')
+                              .send(undefined);
+
+            expect(res.body.err).toBe("Missing ID or Update Value");
+        });
+    })
 });
