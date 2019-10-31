@@ -1,7 +1,5 @@
 const request = require('supertest');
-
 const server = require('../../server/server');
-const db = require('../../data/dbConfig');
 
 describe('DEVELOPER ROUTES', () => {
 
@@ -23,7 +21,7 @@ describe('DEVELOPER ROUTES', () => {
             expect(res.type).toBe('application/json');
         });
 
-        it('should return all schools in the database', async () => {
+        it('should return all developers in the database', async () => {
             const res = await request(server).get('/api/devs');
 
             expect(res.body.length).toBe(5);
