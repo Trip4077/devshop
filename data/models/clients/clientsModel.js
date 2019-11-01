@@ -8,6 +8,10 @@ const getClient = id => {
     return db('clients').where({ id });
 }
 
+const getClientByEmail = email => {
+    return db('clients').where({ email });
+}
+
 const addClient = async newClient => {
     const [ id ] = await db('clients').insert(newClient);
 
@@ -27,6 +31,7 @@ const deleteClient = id => {
 module.exports = {
     getAllClients,
     getClient,
+    getClientByEmail,
     addClient,
     editClient,
     deleteClient
