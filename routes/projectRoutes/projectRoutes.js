@@ -28,6 +28,19 @@ router.get('/:id', async (req, res) => {
                   })
 });
 
+router.post('/', async (req, res) => {
+    //Ensure ID and Project was passed
+    if( !Object.keys(req.body).length ) res.status(400).json({ err: "Missing Project To Add" });
+
+    await Projects.addProject(req.body)
+                  .then(added => {
+                      res.status(201).json(added);
+                  })
+                  .catch(err => {
+                      console.log(err);
+                  });
+});
+
 router.put('/:id', async (req, res) => {
     //Ensure ID and Update was passed
     if( !req.params.id || !Object.keys(req.body).length ) res.status(400).json({ err: "Missing ID or Update Value" });
