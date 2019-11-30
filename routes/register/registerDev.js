@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
     const hash = bcrypt.hashSync(user.password, 12);
 
     user.password = hash;
-
+    console.log(user)
     await Developers.addDev(user)
                     .then(user => {
                         res.status(201).json(user[0])
@@ -32,6 +32,8 @@ router.post('/login', async (req, res) => {
                     .then(user => {
                         if(user && bcrypt.compareSync(password, user[0].password)) {
                             const token = genToken(user[0]);
+
+                            delete user[0].password
 
                             res.status(200).json({
                                 message: `Welcome ${user[0].first_name}`,
