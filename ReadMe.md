@@ -81,6 +81,72 @@
   company: 'DevShop24'
 }
 ```
+
+## Login:
+### Developer Login
+- URL = https://dev-shop-24-api.herokuapp.com/api/devs/login
+- Notes: This will return a JWT which will be used through the app to authenticate the developer. 
+- Accepted Shape:
+```
+{
+  email: 'dev@email.com',
+  password: 'passwordString',
+}
+```
+
+### Client Login
+- URL = https://dev-shop-24-api.herokuapp.com/api/clients/login
+- Notes: This will return a JWT which will be used through the app to authenticate the developer. 
+- Accepted Shape:
+```
+{
+  email: 'client@email.com',
+  password: 'passwordString',
+}
+```
+
+## Developer Routes:
+
+### URL https://dev-shop-24-api.herokuapp.com/api/devs
+### GET
+- NOTES: Returns All Developers In Table As An Array
+
+### URL https://dev-shop-24-api.herokuapp.com/api/devs/{ID}
+### GET
+- NOTES: Returns The Developer That Matches The Passed ID An Object
+
+### PUT
+- NOTES: Updates Developer Information In Database, Returns Updated Data
+
+- Accepted Shapes (Must Contain at Least 1 Key ):
+
+```
+Example 1:
+
+{
+  first_name: 'Bob',
+  last_name: 'Smith',
+  email: 'dev@email.com',
+  password: 'passwordString',
+  phone: '555-555-5555',
+  title: 'Full Stack Developer',
+  location: 'US',
+  tech_stack: 'html,css,javascript',
+  interest: 'coding,coffee,testing',
+  rate: 15.0,
+  available: true
+}
+
+Example 2:
+
+{
+  first_name: 'Bob',
+}
+```
+
+### DELETE
+- NOTES: Returns A Message On Successful Removal Of Developer From Database
+
 <!-- 
 ## User Login
 - URL = http://luncher-lambda-buildweek.herokuapp.com/login 
