@@ -8,6 +8,7 @@ const clientRoutes = require('./clientsRoutes/clientRoutes');
 const clientRegisterRoutes = require('./register/registerClient');
 
 const projectRoutes = require('./projectRoutes/projectRoutes');
+const teamRoutes = require('./teamRoutes/teamRoutes');
 
 //Connect Routes
 router.use('/devs', devRegisterRoutes)
@@ -17,5 +18,6 @@ router.use('/devs', developerRoutes);
 router.use('/clients', clientRoutes);
 
 router.use('/projects', projectRoutes);
+router.use('/teams', teamRoutes);
 
 module.exports = router;
