@@ -107,11 +107,13 @@
 
 ## Developer Routes:
 
-### URL https://dev-shop-24-api.herokuapp.com/api/devs
+#### URL https://dev-shop-24-api.herokuapp.com/api/devs
+
 ### GET
 - NOTES: Returns All Developers In Table As An Array
 
-### URL https://dev-shop-24-api.herokuapp.com/api/devs/{ID}
+#### URL https://dev-shop-24-api.herokuapp.com/api/devs/{ID}
+
 ### GET
 - NOTES: Returns The Developer That Matches The Passed ID An Object
 
@@ -146,6 +148,45 @@ Example 2:
 
 ### DELETE
 - NOTES: Returns A Message On Successful Removal Of Developer From Database
+
+## Client Routes:
+
+#### URL https://dev-shop-24-api.herokuapp.com/api/clients
+
+### GET
+- NOTES: Returns All Clients In Table As An Array
+
+#### URL https://dev-shop-24-api.herokuapp.com/api/clients/{ID}
+
+### GET
+- NOTES: Returns The Client That Matches The Passed ID An Object
+
+### PUT
+- NOTES: Updates Client Information In Database, Returns Updated Data
+
+- Accepted Shapes (Must Contain at Least 1 Key ):
+
+```
+Example 1:
+
+{
+  first_name: 'Jane',
+  last_name: 'Johnson',
+  email: 'client@email.com',
+  password: 'passwordString',
+  phone: '555-555-5555',
+  company: 'DevShop24'
+}
+
+Example 2:
+
+{
+  first_name: 'Anna',
+}
+```
+
+### DELETE
+- NOTES: Returns A Message On Successful Removal Of Client From Database
 
 <!-- 
 ## User Login
