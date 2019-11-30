@@ -2,6 +2,7 @@
     https://dev-shop-24-api.herokuapp.com/
 
 # Models
+```
     const Developer_Template = {
         first_name: 'John',
         last_name: 'Smith',
@@ -41,10 +42,9 @@
         ui_id: 3,
         devops_id: 4
     }
+```
 
-
-
-# DB Interaction
+# Authentication and Registration
 
 ## Registration:
 ### Register New Developer
@@ -104,6 +104,8 @@
   password: 'passwordString',
 }
 ```
+
+# Routes
 
 ## Developer Routes:
 
@@ -188,41 +190,110 @@ Example 2:
 ### DELETE
 - NOTES: Returns A Message On Successful Removal Of Client From Database
 
-<!-- 
-## User Login
-- URL = http://luncher-lambda-buildweek.herokuapp.com/login 
+## Projects Routes:
 
-- NOTES: This will return a JWT which will be used through the app to authenticate the user 
+#### URL https://dev-shop-24-api.herokuapp.com/api/projects
+
+### GET
+- NOTES: Returns All Projects In Table As An Array
+
+#### URL https://dev-shop-24-api.herokuapp.com/api/projects/{ID}
+
+### GET
+- NOTES: Returns The Project That Matches The Passed ID An Object
+
+### POST
+- NOTES: Adds New Project To Database, Returns Project With ID
 
 - Accepted Shape:
+
 ```
 {
-    email: "Bill@Billy.com",
-    password: "TacoMan"
+  title: 'Awesome App',
+  budget: '$5,000',
+  deadline: '12/12/12',
+  type: 'Web',
+  description: 'An awesome web app'
 }
 ```
 
-## Individual User Routes
-- URL = http://luncher-lambda-buildweek.herokuapp.com/users/{id}
-- Notes: MUST have JWT passed as Authentication header to access ALL `/users/{id}` routes
+### PUT
+- NOTES: Updates Project Information In Database, Returns Updated Data
 
-## School Routes
-- URL = http://luncher-lambda-buildweek.herokuapp.com/schools
-- Notes: MUST have a JWT passed as Authentication header to access ALL `/schools` routes
+- Accepted Shapes (Must Contain at Least 1 Key ):
 
-### Post New School
-- Accepted Shape:
 ```
+Example 1:
+
 {
-    name: "The New School",
-    address: "111 School St, Atlantis, 55555",
-    funds_required: 2500,
-    admin_id: 3,
-    funds_donated: 100 **
+  title: 'Even Better App',
+  budget: '$5,000',
+  deadline: '12/12/12',
+  type: 'Web',
+  description: 'An awesome web app'
 }
 
+Example 2:
+
+{
+  title: 'Even Better App',
+}
 ```
 
+### DELETE
+- NOTES: Returns A Message On Successful Removal Of Project From Database
 
- -->
+## Teams Routes:
 
+#### URL https://dev-shop-24-api.herokuapp.com/api/teams
+
+### GET
+- NOTES: Returns All Teams In Table As An Array Of Objects With Names and IDs For Project, Client, and Developers
+
+#### URL https://dev-shop-24-api.herokuapp.com/api/teams/{ID}
+
+### GET
+- NOTES: Returns The Team That Matches The Passed ID An Object With Names and IDs For Project, Client, and Developers
+
+### POST
+- NOTES: Adds New Team To Database, Returns Team With IDs
+
+- Accepted Shape:
+
+```
+{
+  client_id: 1,
+  project_id: 2,
+  frontend_id: 2,
+  backend_id: 2,
+  ui_id: 3,
+  devops_id: 4
+}
+```
+
+### PUT
+- NOTES: Updates Team IDs In Database, Returns Updated Data
+
+- Accepted Shapes (Must Contain at Least 1 Key ):
+
+```
+Example 1:
+
+{
+  client_id: 1,
+  project_id: 2,
+  frontend_id: 3,
+  backend_id: 2,
+  ui_id: 3,
+  devops_id: 4
+}
+
+Example 2:
+
+{
+  frontend_id: 3,
+}
+```
+
+### DELETE
+- NOTES: Returns A Message On Successful Removal Of Team From Database
