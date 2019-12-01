@@ -13,9 +13,11 @@ const getClientByEmail = email => {
 }
 
 const addClient = async newClient => {
-    const [ id ] = await db('clients').insert(newClient);
+    await db('clients').insert(newClient);
 
-    return db('clients').where({ id });
+    const clients = await db('clients');
+    
+    return clients[clients.length-1]
 }
 
 const editClient = async (id, update) => {
