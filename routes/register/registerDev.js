@@ -17,9 +17,11 @@ router.post('/register', async (req, res) => {
     console.log(user)
     await Developers.addDev(user)
                     .then(user => {
+                        console.log('THEN', user)
                         res.status(201).json(user)
                     })
                     .catch(err => {
+                        console.log('CATCH', err)
                         if( err.errno === 19 ) {res.status(400).json({ err: "Email Already Exists" });}
                         else { res.status(400).json(err); } 
                     });
