@@ -13,9 +13,11 @@ const getDevByEmail = email => {
 }
 
 const addDev = async newDev => {
-    return await db('developers').insert(newDev);
-    // console.log('ID', id)
-    // return db('developers').where({ id });
+    await db('developers').insert(newDev);
+
+    const devs = await db('developers');
+    
+    return devs[devs.length-1]
 }
 
 const editDev = async (id, update) => {
