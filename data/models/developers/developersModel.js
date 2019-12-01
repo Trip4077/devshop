@@ -13,7 +13,7 @@ const getDevByEmail = email => {
 }
 
 const addDev = async newDev => {
-    const [ id ] = await db('developers').insert(newDev);
+    const id = await db('developers').insert(newDev);
 
     return db('developers').where({ id });
 }
