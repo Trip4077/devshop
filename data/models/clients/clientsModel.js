@@ -16,7 +16,7 @@ const addClient = async newClient => {
     await db('clients').insert(newClient);
 
     const clients = await db('clients');
-    
+    console.log(clients)
     return clients[clients.length-1]
 }
 
