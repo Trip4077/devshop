@@ -1,8 +1,10 @@
 const router = require('express').Router();
+const authenticate = require('../../middleware/authenticate');
+
 const Teams = require('../../data/models/teams/teams');
 
 
-router.get('/', async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
     await Teams.getAllTeams()
                .then(teams => {
                    res.status(200).json(teams);
@@ -12,7 +14,7 @@ router.get('/', async (req, res) => {
                });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
     if( !Number.isNaN(Number(req.params.id)) ) {
 
         await Teams.getTeam(req.params.id)
@@ -31,7 +33,7 @@ router.get('/:id', async (req, res) => {
     };
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     if( !Object.keys(req.body).length ) res.status(400).json({ err: "Missing Team To Add" });
 
     await Teams.addTeam(req.body)
@@ -43,7 +45,7 @@ router.post('/', async (req, res) => {
                   });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticate, async (req, res) => {
     if( !req.params.id || !Object.keys(req.body).length ) res.status(400).json({ err: "Missing ID or Update Value" });
 
     await Teams.editTeam(req.params.id, req.body)
@@ -58,7 +60,7 @@ router.put('/:id', async (req, res) => {
                     });
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
     //Ensure ID was passed to route
     if( !req.params.id ) res.status(400).json({ err: "Missing ID" });
 

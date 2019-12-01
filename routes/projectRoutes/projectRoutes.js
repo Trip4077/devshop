@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const authenticate = require('../../middleware/authenticate');
+
 const Projects = require('../../data/models/projects/projectsModel');
 
-router.get('/', async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
 
     await Projects.getAllProjects()
                   .then(projects => {
@@ -13,7 +15,7 @@ router.get('/', async (req, res) => {
 
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
     //Ensure ID was passed to route
     if( !req.params.id ) res.status(400).json({ err: "Missing ID" });
 
@@ -28,7 +30,7 @@ router.get('/:id', async (req, res) => {
                   })
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     //Ensure ID and Project was passed
     if( !Object.keys(req.body).length ) res.status(400).json({ err: "Missing Project To Add" });
 
@@ -41,7 +43,7 @@ router.post('/', async (req, res) => {
                   });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticate, async (req, res) => {
     //Ensure ID and Update was passed
     if( !req.params.id || !Object.keys(req.body).length ) res.status(400).json({ err: "Missing ID or Update Value" });
 
@@ -58,7 +60,7 @@ router.put('/:id', async (req, res) => {
 
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
     //Ensure ID was passed to route
     if( !req.params.id ) res.status(400).json({ err: "Missing ID" });
 
