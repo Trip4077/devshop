@@ -54,9 +54,11 @@ const getTeam = id => {
 }
 
 const addTeam = async team => {
-    const [ id ] = await db('teams').insert(team);
+    await db('teams').insert(team);
 
-    return await getTeam(id);
+    const teams = await db('teams');
+    
+    return teams[teams.length-1]
 }
 
 const editTeam = async (id, update) => {
