@@ -9,9 +9,11 @@ const getProject = id => {
 }
 
 const addProject = async project => {
-    const [ id ] = await db('projects').insert(project);
+    await db('projects').insert(project);
 
-    return db('projects').where({ id });
+    const projects = await db('projects');
+    
+    return projects[projects.length-1]
 }
 
 const editProject = async (id, update) => {
